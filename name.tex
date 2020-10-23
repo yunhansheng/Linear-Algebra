@@ -1,0 +1,57 @@
+\documentclass[]{book}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+
+\begin{document}
+Part (a) is solved incorrectly.\medbreak
+The formula the student used, $x=v_0t+\frac{1}{2}t^2$, is only suited for straight-line motion of \emph{constant} acceleration, and as we see from the acceleration $a=At-Bt^2$ does vary about time.\medbreak
+Hence for part (a) I give the student 0 points (2 points deducted for incorrect position $x(t)$ and 2 for velocity $v(t)$.\medbreak
+Here is a correct solution I provide:
+\[v(t)=\int a(t)dt+c=\int(At-Bt^2)+c=\frac{1}{2}At^2-\frac{1}{3}Bt^3+c\]
+when $t=0$
+\[v(0)=0=c\]
+since the bike is at rest.
+Hence
+\[v(t)=\frac{1}{2}At^2-\frac{1}{3}Bt^3\]
+On the other hand,
+\[x(t)=\int v(t)dt+c'=\int(frac{1}{2}At^2-\frac{1}{3}Bt^3)+c'=\frac{1}{6}At^3-\frac{1}{12}Bt^4+c'\]
+when $t=0$
+\[x(0)=0=c'\]
+since the bike is at the origin
+Hence
+\[x(t)=\frac{1}{6}At^3-\frac{1}{12}Bt^4\]
+
+\bigbreak
+Part (b) uses the correct method, but unfortunately gets the wrong answer since it inherits the mistakes from part (a).\medbreak
+Hence I will give 2 points in this part, 2 points awarded for the correct methodology and 2 deducted for the false answer.\medbreak
+Here a correct solution I shall provide:
+\[v'(t)=0\Rightarrow t=0\textrm{ or }t=\frac{A}{B}\]
+plug both in $v(t)=\frac{1}{2}At^2-\frac{1}{3}Bt^3$ yields
+\[v_1=\frac{1}{6}\frac{A^3}{B^2}\approx39.1\textrm{ and }v_2=0\]
+Hence the the maximum speed achieved is
+\[|v_{max}|\approx39.1ms^{-1}\]
+\bigbreak
+
+Overall, the solution is clearly written, although not all steps are justified. For example in part (b) when obtaining
+\[a=t(A-Bt)=0\]
+the student automatically takes the solution $t=\frac{A}{B}$ without justification. Despite the mistakes, the explanations and motivations for the methodology is sufficient and logical. The significant figures are considered in part (b). Hence I will award 1 point in the overall rubric.\medbreak
+
+Total points: $0+2+1=3$
+
+
+
+\end{document}

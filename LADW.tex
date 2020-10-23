@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amssymb}
 \usepackage[mathscr]{eucal}
+\usepackage{relsize}
 \usepackage{graphicx}
 
 \setcounter{section}{+0}
@@ -22,14 +23,25 @@
 \usepackage{hyperref}
 \hypersetup{colorlinks=false}
 
-\DeclareMathOperator{\range}{ran}
+\DeclareMathOperator{\range}{Ran}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\End}{End}
 
 
 
 \begin{document}
+
 \begin{center}
-\LARGE\textbf{A Streamlined Version of LADW}\newline
+\LARGE\textbf{A Streamlined Version of LADW}
 \end{center}
+
+\begin{center}
+ \large{for those who knew linear algebra already to go over in 30 min.}
+\end{center}
+
+
 
 \section{Basic Notations}
 
@@ -40,34 +52,41 @@ set with 2 operations satisfying: \newline
 \indent A2. add. associativity
 \indent A3. add. identity
 \indent A4. add. inverse \newline
-\indent M1. mult. inverse
+\indent M1. mult. identity
 \indent M2. mult. associativity \newline
 \indent D. mutual distributive
 \end{defin}
 
 \subsection{Linear combinations, bases}
 \begin{defin}~\\
-basis \newline
-generating/complete system \newline
-linearly (in)dependent system
+basis: \emph{any} $v\in V$ admits \emph{unique} representation \newline
+generating/complete system: \emph{any} $v\in V$ admits representation \newline
+linearly independent system: only trivial linear combination admits 0 vector
 \end{defin}
 
-\begin{proposition} (alternative def. of linearly (in)dependent)~\\
-
+\begin{proposition} (alternative def. of linearly dependency)~\\
+linearly dependent iff any vectors can be represented as a linear combination of the others
 \end{proposition}
 
-\begin{proposition} (alternative def. of basis)~\\
-$|\textrm{generating system}|>|basis|$
+\begin{proposition} (alternative def. of basis) basis iff linearly independent \& generating
 \end{proposition}
+
+\begin{proposition}
+$|\textrm{basis}|\leq|\textrm{generating system}|$
+\end{proposition}
+
+\begin{remark}
+The other part of the inequality concerning |basis| and |linearly independent system| will be a corollary of \autoref{Prop 2.1}.
+\end{remark}
 
 \subsection{Linear Transformations. Matrix-vector multiplication}
 
 \begin{defin}
-linear transformation
+linear transformation: $T:V\to W$ satisfying $T(\alpha u+\beta v)=\alpha T(u)+\beta T(v)$ for all $u,v\in V$
 \end{defin}
 
 \begin{remark}
-Matrix-vector multiplication. A linear transformation is completely defined by its values on a generating set.
+Matrix-vector multiplication. A linear transformation is completely defined by its values on a generating set (esp. basis).
 \end{remark}
 
 \subsection{Linear transformation as a vector space}
@@ -82,51 +101,55 @@ The set of linear transformations from $V$ to $W$ (represented by $m\times n$ ma
 Matrix multiplication.
 \end{remark}
 
-\begin{proposition} (properties of matrix mult.)
-
+\begin{proposition} (properties of matrix mult.) \\
+associativity, distributivity over matrix addition, scalar commutativity
 \end{proposition}
 
-\begin{defin}
-trace:
+\begin{remark}
+An additional property of matrix multiplication is non-commutativity.
+\end{remark}
+
+\begin{defin}~\\
+transpose: $(A^T)_{j,i}=(A)_{i,j}$ \newline
+trace: $\trace A_n=\sum a_{i,i}$
 \end{defin}
 
 \begin{proposition}~\\
-a. \newline
-b.
+\indent a. $A^TB^T=(BA)^T$\newline
+\indent b. $\trace(AB)=\trace(BA)$
 \end{proposition}
 
 \subsection{Invertible transformations and matrices. Isomorphisms}
 
-\begin{defin}
-identity transformation \newline
-left (right) invertible transformation and inverses \newline
-invertible
+\begin{defin}~\\
+left (right) invertible transformation: $BA=I$ ($AC=I)$\newline
+invertible/isomorphism: left \emph{and} right invertible
 \end{defin}
 
 \begin{proposition} (alternative def. of invertible)
-
+invertible if left \& right inverses are unique and coincide
 \end{proposition}
 
-\begin{proposition}
-(inverse of product and transposition)
-a. \newline
-b. 
+\begin{proposition} (inverse of product and transposition)\\
+\indent a. $(AB)^{-1}=B^{-1}A^{-1}$\newline
+\indent b. ${A^T}^{-1}={A^{-1}}^T$
 \end{proposition}
 
-\begin{proposition}
-isomorphism preserves basis and vice versa
+\begin{proposition}\label{Prop 1.8} (two iff condition of isomorphism)\\
+\indent a. isomorphism preserves basis and vice versa \newline
+\indent b. invertible iff $A(x)=b$ admits unique solution $\forall b$
 \end{proposition}
 
-\begin{proposition}
-invertible and equation
-\end{proposition}
+\begin{remark}
+An important corollary of \autoref{Prop 1.8} is that all n dimension vector spaces are isomorphic, esp. to $\mathbb{R}^n$
+\end{remark}
 
 \subsection{Subspaces}
 \begin{defin}~\\
-subspace \newline
-\indent null space/kernel of A $\ker A$ \newline
-\indent range of a $\range A$ \newline
-\indent linear span of ... $\mathscr{L}$
+subspace: subset+closed under vector addition and scalar multiplication \newline
+\indent null space/kernel of A: $\ker A=\{v\in V\mid A(v)=0\}$ \newline
+\indent range of A: $\range A=\{A(v)\mid v\in V\}$ \newline
+\indent linear span of $v_1,v_2,...,v_n\in V$: $\mathscr{L}(v_1,v_2,...,v_n)=\{v\in V\mid v=\alpha_1v_1+\alpha_2v_2+...+\alpha_nv_n\}$
 \end{defin}
 
 \subsection{Applications to computer graphic}
@@ -136,8 +159,215 @@ wanna just skip...
 
 \section{System of linear equations}
 
+\subsection{Different faces of linear systems}
+\begin{defin}~\\
+linear system: system of m linear equations with n unknowns \newline
+coefficient matrix \& augumented matrix
+\end{defin}
+
+\subsection{Solution of a linear system. Echelon and reduced echelon forms}
+
+\begin{remark}
+Algorithm for solving systems of linear equations, and a bunch of fancy-fancy terms such as echelon form and Gauss-Jordan elimination. The important thing is to remember the corresponding elementary matrices.
+\end{remark}
+
+\subsection{Analyzing the pivots}
+
+\begin{proposition}\label{Prop 2.1} (pivots on the uniqueness and existence of solutions)~\\
+Let echelon form of coefficient matrix be $A$, then \newline
+\indent pivot in every column iff column vectors are linearly independent iff the solution (if exists) is unique \newline
+\indent pivot in every row iff column vectors are generating iff a solution exists\newline
+\indent pivot in every row and column iff column vectors form a basis iff a unique solution exists
+\end{proposition}
+
+\begin{remark}
+$|\textrm{linearly independent system}|\leq|\textrm{basis}|$ is thus a corollary of \autoref{Prop 2.1}. Furthermore, $\textrm{|linearly independent system in } \mathbb{F}^n|\leq $, and $\textrm{|generating system in } \mathbb{F}^n|\geq n$, hence $\textrm{|basis in } \mathbb{F}^n|=n$. As another corollary of \autoref{Prop 2.1}, a matrix is invertible iff its echelon form has a pivot in every row and column, and hence a square (from \autoref{Prop 1.8} (b)).
+\end{remark}
+
+\begin{proposition}
+left (or right) invertibility  of a square matrix implies invertibility
+\end{proposition}
+
+\subsection{Finding $A^{-1}$ by row reduction}
+
+\begin{remark}
+Finding the inverse by row reduction on augmented matrix.
+\end{remark}
+
+\begin{proposition}
+Every invertible matrix can be represented as a product of elementary matrices
+\end{proposition}
+
+\subsection{Dimension. Finite-dimensional space}
+
+\begin{defin}
+dimension: $\dim V:=\textrm{number of basis}$
+\end{defin}
+
+\begin{remark}
+Completion to basis from a linearly independent system is possible and relies on the "\emph{finitness}" of a vector space.
+\end{remark}
+
+\subsection{General solution of a linear system}
+
+\begin{proposition} (general solution of a linear system) \newline
+general solution of $\mathscr{L}$ = general solution of the homogeneous $\mathscr{L}'$ + a particular solution of $\mathscr{L}$
+\end{proposition}
+
+\subsection{Fundamental subspaces of a matrix. Rank}
+
+\begin{remark}
+fundamental subspaces of matrix $A$:
+\begin{center}
+    column space $\range A$, null space $\ker A$, row space $\range A^T$, left null space  $\ker A^T$
+\end{center} 
+\end{remark}
+
+\begin{defin}
+rank: $\rank V:= \dim \range A$
+\end{defin}
+
+\begin{remark}
+Algorithm of finding bases of the fundamental subspaces.
+\end{remark}
+
+\begin{proposition}\label{Prop 2.5} (The Rank Theorem) For a $m\times n$ matrix $A$
+\begin{align*}
+    & \rank A=\rank A^T \\
+    & \dim \ker A+\dim \range A=\dim \ker A+\rank A=n \\
+    & \dim \ker A^T+\dim \range A^T=\dim \ker A^T+\rank A^T=m
+\end{align*}
+\end{proposition}
+
+\begin{remark}
+As a corollary to \autoref{Prop 2.5}, $Ax=b$ has a solution $\forall b$ iff the dual equation $A^Tx=0$ has a unique (the trivial) solution. It also gives an algorithm of completion to basis.
+\end{remark}
+
+\subsection{Representation of a linear transformation in arbitrary
+bases. Change of coordinates formula}
+
+\begin{remark}
+Change of basis.
+\end{remark}
+
+\begin{defin}
+similar matrix: $A$ and $B$ are similar if $\exists$ invertible $Q$ s.t. $A=Q^{-1}BQ$
+\end{defin}
 
 
+
+\section{Determinants}
+
+\subsection{Introduction}
+
+\begin{defin}
+volume of n-dimensional parallelepiped (determined by vectors $v_1, v_2, ..., v_n$):
+\[
+\{v=t_1v_1+t_2v_2+...+t_3v_3\mid |t_k|\leq 1 \textrm{ for all }k\}
+\]
+\end{defin}
+
+\subsection{What properties determinant should have}
+
+\begin{remark}
+Deriving \autoref{Prop 3.1} by geometric arguments (the properties of volume of n-dimensional parallelepiped).
+\end{remark}
+
+\subsection{Constructing the determinant}
+
+\begin{proposition}\label{Prop 3.1} (properties of determinant) \newline
+\indent a. linearity \newline
+\indent b. antisymmetry \newline
+\indent c. normalization
+\end{proposition}
+
+\begin{proposition}
+$\det A\neq 0$ iff A is invertible
+\end{proposition}
+
+\begin{proposition}\label{Prop 3.3} (determinant of transposition and product) \newline
+\indent a. $\det (AB)=\det A\det B$ \newline
+\indent b. $\det (A^{T})=\det A$
+\end{proposition}
+
+\subsection{Formal definition. Existence and uniqueness of the
+determinant}
+
+\begin{defin}
+$\det A=\mathlarger{\mathlarger{\sum\limits_{i\in (\begin{smallmatrix} 1&2&...&n\\ i_1&i_2&...&i_n \end{smallmatrix})}}}a_{i_1}a_{i_2}...a_{i_n}\sign(i)$
+\end{defin}
+
+\begin{remark}
+Finally arriving at this cumbersome def. of determinant. It's more intuitive to think of a process of picking one element from each row (or column, by \autoref{Prop 3.3}) and then summand of its multiplication.
+\end{remark}
+
+\subsection{Cofactor expansion}
+
+\begin{proposition} (cofactor expansion) \\
+For each row j $\left(1\leq j\leq n\right)$,
+\[
+\det A=\sum_{k=1}^{n}a_{j,k}(-1)^{j+k}\det{A_{j.k}}
+\]
+as for each column
+\end{proposition}
+
+\begin{proposition}
+Let $C$ be the cofactor matrix of an invertible matrix $A$, then $A^{-1}=C^T/\det A$
+\end{proposition}
+
+\begin{proposition} (Cramer's rule)
+Solution of $Ax=b$ can be given as
+\[
+(x_1,x_2,...,x_n)=(\frac{\det B_1}{\det A},\frac{\det B_2}{\det A},...,\frac{\det B_n}{\det A})
+\]
+where $B_k$ is the replacement of $k$-th column of $A$ by $b$
+
+\end{proposition}
+
+\subsection{Minors and rank}
+
+\begin{defin}
+order-$k$ minor of $A$: determinant of $k\times k$ submatrix of $A$
+\end{defin}
+
+\begin{proposition} (minors and rank) $\rank A$ is the largest $k$ s.t. not all minors of $A$ of order $k$ are 0
+\end{proposition}
+
+
+
+\section{Introduction to spectral theory (eigenvalues and eigenvectors)}
+
+\subsection{Main definitions}
+
+\begin{defin}~\\
+eigenvalue $\lambda$ of a linear operator $A\in \End{(V)}$: $\exists$ \emph{non-zero} vector (eigenvector) $v\in V$ s.t $Av=\lambda v$ \newline
+eigenspace: $\ker(A-\lambda I)\cup 0$ \newline
+spectrum of $A$: the set $\sigma(A)$ of all eigenvalues of $A$ \newline
+characteristic polynomial of $A$: $p(\lambda)=\det(A-\lambda I)$
+\end{defin}
+
+\begin{remark}
+Finding eigenvalues of $A$ amounts to finding the roots of the characteristic polynomial. Analysing the characteristic polynomials of similar matrices we conclude that the eigenvalues of an linear operator does not depend on the bases. Also, for the characteristic polynomial to have roots all the time, we typically consider $\mathbb{C}$ to be the field the vector space is over of.
+\end{remark}
+
+\begin{defin} multiplicity \newline
+\indent (algebraic) multiplicity of eigenvalue $\lambda$: the largest $k$ s.t. $(z-\lambda)^k$ divides $p(z)=\det(A-zI)$ \newline
+\indent geometric multiplicity: $\dim \ker (A-\lambda I)$
+\end{defin}
+
+\begin{proposition}
+geometric multiplicity $\leq$ (algebraic) multiplicity
+\end{proposition}
+
+\begin{proposition} (eigenvalues \& trace, determinant) \newline
+Let $\lambda_k$ be the complex eigenvalues (counting multiplicities) of $n\times n$ matrix $A$, then\newline
+\indent a. $\trace A=\sum \lambda_k$ \newline
+\indent b. $\det A=\prod \lambda_k$
+\end{proposition}
+
+\subsection{Diagonalization}
+
+\section{Inner product spaces}
 
 
 

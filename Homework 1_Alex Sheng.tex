@@ -1,0 +1,249 @@
+\documentclass[]{book}
+
+\usepackage{array,epsfig}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{color}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}{Corollary}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}{Lemma}
+\newtheorem*{joke}{Joke}
+\newtheorem{ex}{Example}
+\newtheorem*{soln}{Solution}
+\newtheorem{prop}{Proposition}
+
+\setlength{\topmargin}{-.3 in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textheight}{9.in}
+\setlength{\textwidth}{6.5in}
+\pagestyle{empty}
+
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\y}{\mathbf{y}}
+\newcommand{\z}{\mathbf{z}}
+\newcommand{\0}{\mathbf{0}}
+
+
+
+\begin{document}
+
+\begin{center}
+{\Large\textbf Math 20250 \hspace{0.5cm} Homework 1}\\
+\large{Alex Sheng}\\
+\normalsize{Due: Wednesday Oct 7, 11:59 PM}
+\end{center}
+
+\vspace{0.2 cm}
+
+\begin{enumerate}
+\item (Exercise 1:1.1)
+Let $\x=(1,2,3)^T$, $\y=(y_1,y_2,y_3)^T$, $\z=(4,2,1)^T$. Compute $2\x$, $3\y$, $\x+2\y-3\z$.
+\begin{soln}
+	$2\x=(2,4,6)^T$, $3\y=(3y_1,3y_2,3y_3)^T$, $\x+2\y-3\z=(-11+2y_1,-4+2y_2,2y_3)^T$
+\end{soln}
+
+\item (Exercise 1:1.2)
+Which of the following sets (with natural addition and multiplication by a scalar) are vector spaces.\newline
+\indent a) The set of all continuous functions on the interval $[0,1]$;\newline
+\indent b) The set of all non-negative functions on the interval $[0,1]$;\newline
+\indent c) The set of all polynomials of degree exactly n;\newline
+\indent d) The set of all symmetric $n\times n$ matrices.
+\begin{soln}~\\
+\indent a) Yes. Let $a\in [0,1]$ and $f_1,f_2,f_3,f_0,f\in C([0,1],\mathbb{F})$, then from the fact that $\mathbb{F}$ is a vector field:
+\[
+(f_1+f_2)(a)=f_1(a)+f_2(a)=f_2(a)+f_1(a)=(f_2+f_1)(a)
+\]\[
+((f_1+f_2)+f_3)(a)=(f_1+f_2)(a)+f_3(a)=(f_1(a)+f_2(a))+f_3(a)=f_1(a)+(f_2(a)+f_3(a))=f_1(a)+(f_2+f_3)(a)
+\]\begin{center}
+    Let $f_0:a\mapsto 0$ then $(f+f_0)(a)=f(a)+f_0(a)=f(a)$, hence $f_0$ the additive inverse
+\end{center}\begin{center}
+    $-f$ serves the role of additive inverse for $f$
+\end{center}\[
+(\alpha\beta)f(a)=\alpha(\beta f(a))
+\]\begin{center}
+    Let $f'_0:a\mapsto 1$ then $(ff'_0)(a)=f(a)f'_0(a)=f(a)$, hence $f'_0$ the multiplicative inverse
+\end{center}\[
+(\alpha+\beta)(f_1+f_2)(a)=(\alpha+\beta)f_1(a)+(\alpha+\beta)f_2(a)=\alpha f_1(a)+\beta f_1(a)+\alpha f_2(a)+\beta f_2(a)
+\]
+\indent b) No. Let $a\in [0,1]$ and $f:a\mapsto 1$, then $\nexists$ an additive inverse for $f$ in the set.\newline
+\indent c) Depends, generally no. \newline 
+If $n=0$ and we agree that the $\deg(0)=0$, then the set of degree-$n$ polynomials over a field $\mathbb{F}$ is really $\mathbb{F}$ itself, hence a vector space.\newline
+However, if we agree that the degree of polynomial 0 is -1 or$-\infty$ then the set of degree-0 polynomials \emph{does not} form a vector space, since the additive inverse is missing. \newline
+For $n\geq 1$ the set of polynomials of degree-$n$ fails to be a vector space, since the multiplicative doesn't exist. \newline
+\indent d) Yes. Since the addition and scalar multiplication of matrices are defined to be entrywise, the commutativity and associativity of matrix addition, the associativity of matrix-scalar multiplication as well as the distributive properties inherit naturally from those of field $\mathbb{F}$ (where the entries are picked from).
+\end{soln}
+
+\item (Exercise 1:1.4)
+Prove that a zero vector $\0$ of a vector space $V$ is unique.
+\begin{proof}
+Assume otherwise that both $\0$ and $\0'$ are zero vectors in $V$ and $x\in V$, then \newline
+\begin{gather*} 
+\0+\x=\x=\0'+\x \\
+\Rightarrow (-\x)+\0+\x=\0'+\x+(-\x) \\
+\Rightarrow \0=\0'
+\end{gather*}
+Hence $\0$ is indeed unique.
+\end{proof}
+
+\item (Exercise 1:1.6)
+Prove that the additive inverse, defined in Axiom 4 of a vector space is unique.
+\begin{proof}
+Assume otherwise that both $\y$ and $\y'$ are additive inverses of $\x\in V$, then
+\[
+    y'=y'+0=y'+(x+y)=(y'+x)+y=0+y=y
+\]
+Hence the additive inverse of a given $\x\in V$ is unique.
+\end{proof}
+
+\item (Exercise 1:1.8)
+Prove that for any vector $\mathbf{v}$ its additive inverse $-\mathbf{v}$ is given by $(-1)\mathbf{v}$.
+\begin{proof}
+We first prove that $0\x=\0$ for $\x\in V$:
+\[
+0\x+\x=(0+1)\x=\x \Rightarrow 0\x=\0
+\]
+With this,
+\[
+(-1)\x+\x=(-1+1)\x=0\x=\0 \Rightarrow (-1)\x=-\x
+\]
+\end{proof}
+
+\item (Exercise 1:2.2)
+True or false:\newline
+a) Any set containing a zero vector is linearly dependent; \newline
+b) A basis must contain $\0$; \newline
+c) subsets of linearly dependent sets are linearly dependent; \newline
+d) subsets of linearly independent sets are linearly independent; \newline
+e) If $\alpha_1 \mathbf{v}_1 + \alpha_2 \mathbf{v}_2 +...+ \alpha_n \mathbf{v}_n = \0$ then all scalars $\alpha_k$ are zero.
+\begin{soln}
+a), d) are correct; b), c) and e) are incorrect.
+\end{soln}
+
+\item (Exercise 1:2.3)
+Write down a basis in the
+space of symmetric $2\times 2$ matrices. How many elements are in the basis?
+\begin{soln}
+$\begin{pmatrix}
+1 & 0 \\
+0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0 \\
+0 & 1
+\end{pmatrix}$ forms a basis of $\mathbf{Sym}_2$. \newline
+They are clearly linearly independent, and $\forall M=
+\begin{pmatrix}
+x & y \\
+y & z
+\end{pmatrix}\in \mathbf{Sym}_2 $,
+\[ M=x
+\begin{pmatrix}
+1 & 0 \\
+0 & 0
+\end{pmatrix}+y
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}+z
+\begin{pmatrix}
+0 & 0 \\
+0 & 1
+\end{pmatrix}
+\]
+Hence by Proposition 1:2.7 they form a basis.
+\end{soln}
+
+\item (Exercise 1:2.4)
+Write down a basis for the space of \newline
+a) $3\times 3$ symmetric matrices; \newline
+b) $n \times n$ symmetric matrices; \newline
+c) $n \times n$ antisymmetric matrices;
+\begin{soln}~\\
+\newline
+a)$\begin{pmatrix}
+1 & 0 & 0\\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & 0 & 0\\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{pmatrix}\begin{pmatrix}
+0 & 1 & 0\\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & 0 & 1\\
+0 & 0 & 0 \\
+1 & 0 & 0
+\end{pmatrix}\begin{pmatrix}
+0 & 0 & 0\\
+0 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix}$ \newline
+\newline
+b) those zero matrices with only $a_{i,i}=1$ for all $i=1,2,...,n$, together with those zero matrices with only $a_{i,j}=a_{j.i}=1$ for all $i\neq j$ ranging from 1 to $n$ \newline
+c) since the diagonal has to be all 0 to meet the antisymmetry condition, only those zero matrices with $a_{i,j}=1$ and $a_{j.i}=-1$ for all $i< j$ ranging from 1 to $n$ forms a basis
+\end{soln}
+
+\item (Exercise 1:2.5)
+Let a system of vectors $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r$ be linearly independent but not generating. Show that it is possible to find a vector $\mathbf{v}_{r+1}$ such that the system $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r,\mathbf{v}_{r+1}$ is linearly independent.
+\begin{lem*}
+System $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r$ is linearly dependent iff some $\mathbf{v}_i$ is a linear combination of $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_{i-1}$, i.e. the vectors \emph{before} it.
+\end{lem*}
+\begin{proof}
+Since $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r$ are not generating, take any $\mathbf{v}_{r+1}\in V$ that cannot be represented by a linear combination of $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r$. It then follows our lemma that the system $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r,\mathbf{v}_{r+1}$ is linearly independent.
+\end{proof}
+Now I prove the Lemma.
+\begin{proof}
+One direction is already implied from Proposition 1:2.6, we only prove the other one.\newline
+Suppose $\mathbf{v}_1,\mathbf{v}_2,...,\mathbf{v}_r$ are linearly dependent, then by definition exists $\alpha_1,\alpha_2,...,\alpha_3\in \mathbb{F}$ not all equal to 0 s.t.
+\[
+\sum_{i=1}^{r}\alpha_i\mathbf{v_i}=\0
+\]
+Take the last non-zero coefficient $\alpha_k$ (meaning after which $\alpha_k+1=...=\alpha_r=0$), then $\mathbf{v}_k$ can be written as a linear combination of the vectors before it, namely
+\[
+\mathbf{v}_k=-\frac{\alpha_1}{\alpha_k}\mathbf{v_1}-...--\frac{\alpha_{k-1}}{\alpha_k}\mathbf{v_{k-1}}
+\]
+Hence completes the proof.
+\end{proof}
+
+\item (Exercise 1:2.6)
+Is it possible that vectors $\mathbf{v_1},\mathbf{v_2},\mathbf{v_3}$ are linearly dependent, but the vectors $\mathbf{w_1}=\mathbf{v_1}+\mathbf{v_2},\mathbf{w_2}=\mathbf{v_2}+\mathbf{v_3},\mathbf{w_3}=\mathbf{v_3}+\mathbf{v_1}$ are linearly independent?
+\begin{soln}
+No, it's not possible. By Proposition 1:2.6, and w.l.o.g. let $\mathbf{v}_3=\alpha\mathbf{v}_1+\beta\mathbf{v}_2$, then all $\mathbf{w_1}$ to $\mathbf{w_3}$ can be written in terms of $\mathbf{v_1}$ and $\mathbf{v_2}$:
+\begin{gather*}
+    \mathbf{w_1}=\mathbf{v_1}+\mathbf{v_2} \\
+    \mathbf{w_2}=\alpha\mathbf{v_1}+(\beta+1)\mathbf{v_2} \\
+    \mathbf{w_3}=(\alpha+1)\mathbf{v_1}+\beta\mathbf{v_2}
+\end{gather*}
+We can thus represent $\mathbf{w_3}$ using a linear combination of $\mathbf{w_1}$ and $\mathbf{w_2}$, the coefficient of which can be found by solving the equation:
+$$\begin{cases} x + \alpha y=\alpha+1 \\ x+(\beta+1)y=\beta\end{cases}$$
+Namely,
+\[
+\mathbf{w_3}=x\mathbf{w_1}+y\mathbf{w_2}
+\]
+with $$\begin{cases} x=\alpha+1-\alpha\frac{\beta-\alpha-1}{\beta+1-\alpha} \\ y=\frac{\beta-\alpha-1}{\beta+1-\alpha}\end{cases}$$
+\end{soln}
+Hence by Proposition 1:2.6 $\mathbf{w_1}$, $\mathbf{w_2}$ and $\mathbf{w_3}$ are not linearly independent.
+\end{enumerate}
+
+\end{document}
